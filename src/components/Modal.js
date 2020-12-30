@@ -14,7 +14,7 @@ export default class Modal extends React.Component {
 
             >
                 <Image></Image>
-                <Text></Text>
+                <Text>Testar</Text>
             </Modal>
         )
     }
