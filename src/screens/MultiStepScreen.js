@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import { StyleSheet, Text, TouchableWithoutFeedback, View, Button } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View, Button, TouchableOpacity } from 'react-native';
 
-import Wisard from '../components/wizard'
+import Wisard from '../components/wizard';
+import ModalComponent from '../components/ModalComponent';
+import { useNavigation } from '@react-navigation/native';
 
-export default class MultiStepScreen extends React.Component {
+export default class MultiStepScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isModalVisible: false,
+    }
+  }
+
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Wisard>
@@ -15,12 +27,22 @@ export default class MultiStepScreen extends React.Component {
             <View style={styles.multiStepStyle}>
               <Text>Bild - framifrån</Text>
               <Button title="Lägg till +"
-              // onPress={}
+
               ></Button>
-              <Text>Se exempel</Text>
+              <TouchableOpacity
+                onPress={() => this.setState({ isModalVisible: true })}
+              >
+                <Text>Se exempel</Text>
+              </TouchableOpacity>
+
             </View>
           </Wisard.Step>
 
+          <ModalComponent
+            isModalVisible={this.state.isModalVisible}
+            setIsModalVisible={() => this.setState({ isModalVisible: false })}
+
+          />
 
 
 
@@ -46,7 +68,10 @@ export default class MultiStepScreen extends React.Component {
             </View>
           </Wisard.Step>
         </Wisard>
+
       </View>
+
+
     );
   }
 }
